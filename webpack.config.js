@@ -1,4 +1,5 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin') // 打包html打依赖包
 
 module.exports = {
   entry: './src/index.js', // 打包的入口
@@ -12,6 +13,12 @@ module.exports = {
  默认是production
  */
   mode: 'development',
+  plugins: [
+    new HtmlWebpackPlugin({ // 将index.html也打包到结果目录中dist文件中  自动在页面中引入打包的结果文件
+      // title: 'Output Management', 这个没有用
+      template: './index.html' // 这个是自己手写的
+    })
+  ],
   module: {
     rules: [ // 当加载以.css结尾的文件的时候，使用css-loader、style-loader进行转换
       {
