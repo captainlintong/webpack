@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin') // 打包html打依赖包
 const CleanWebpackPlugin = require('clean-webpack-plugin') // 清空dist目录的依赖包
+const webpack = require('webpack')
 
 module.exports = {
   entry: './src/index.js', // 打包的入口
@@ -24,7 +25,8 @@ module.exports = {
     new HtmlWebpackPlugin({ // 将index.html也打包到结果目录中dist文件中  自动在页面中引入打包的结果文件
       // title: 'Output Management', 这个没有用
       template: './index.html' // 这个是自己手写的
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin() // 配置热更新只能css热更新，js文件不能热更新（热更新即不刷新页面 样式发生变化）
   ],
   module: {
     rules: [ // 当加载以.css结尾的文件的时候，使用css-loader、style-loader进行转换
