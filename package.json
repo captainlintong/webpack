@@ -33,6 +33,7 @@
     "webpack-cli": "^3.3.0"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.4.3",
     "bootstrap": "^3.3.7"
   }
 }

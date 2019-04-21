@@ -1,3 +1,9 @@
+/**
+ * babel-polyfill一定要引入到模块系统入口的顶部
+ *
+ */
+import "@babel/polyfill"
+
 import foo from './foo'
 /**
  * webpack本身只能打包js模块
@@ -21,3 +27,4 @@ const msg = '你好啊'
  * 无法转换新增的函数，例如数组的includes， 字符串的startsWith， endsWith
  *
  */
+console.log([1, 2, 3].includes(3))
