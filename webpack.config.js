@@ -20,6 +20,11 @@ module.exports = {
           'style-loader', // style-loader的作用是将样式模块生成一个style节点插入head中
           'css-loader' // css-loader的作用是将css文件转换为一个js模块
         ]
+      }, { // 当加载以.png|svg|jpg|gif 结尾打文件的时候， 以file-loader来处理
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ] // 注意：打开index.html不会看见图片，把index.html复制到dist目录里，并且更改js引入的路径，才能看见图片，解决办法是打包html文件
       }
     ]
   }
