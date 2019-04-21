@@ -2,3 +2,6 @@ body {
   background-color: skyblue;
   /* background-image: url('../assets/01.jpg'); */
 }
+h1 {
+  color: blue;
+}
