@@ -34,6 +34,12 @@ module.exports = {
         use: [
           'file-loader'
         ] // 注意：打开index.html不会看见图片，把index.html复制到dist目录里，并且更改js引入的路径，才能看见图片，解决办法是打包html文件
+      },
+      { // 当加载以.woff|woff2|eot|ttf|otf 结尾打文件的时候， 以file-loader来处理
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          'file-loader'
+        ]
       }
     ]
   }

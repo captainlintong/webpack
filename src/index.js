@@ -11,5 +11,6 @@ import foo from './foo'
  * 则需要第三方Loader进行处理
  */
 import './styles/index.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
 foo()
