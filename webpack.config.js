@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin') // 打包html打依赖包
+const CleanWebpackPlugin = require('clean-webpack-plugin') // 清空dist目录的依赖包
 
 module.exports = {
   entry: './src/index.js', // 打包的入口
@@ -14,6 +15,7 @@ module.exports = {
  */
   mode: 'development',
   plugins: [
+    new CleanWebpackPlugin(), // 生成新的结果之前先清空  默认的dest目录
     new HtmlWebpackPlugin({ // 将index.html也打包到结果目录中dist文件中  自动在页面中引入打包的结果文件
       // title: 'Output Management', 这个没有用
       template: './index.html' // 这个是自己手写的
