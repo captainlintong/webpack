@@ -14,6 +14,7 @@ module.exports = {
  默认是production
  */
   mode: 'development',
+  devtool: 'inline-source-map', // 启用source map 源码地图指示  不启用的话 在控制台打印 的结果后面的行号和文件对不上
   plugins: [
     new CleanWebpackPlugin(), // 生成新的结果之前先清空  默认的dest目录
     new HtmlWebpackPlugin({ // 将index.html也打包到结果目录中dist文件中  自动在页面中引入打包的结果文件
