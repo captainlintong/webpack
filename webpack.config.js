@@ -40,6 +40,14 @@ module.exports = {
         use: [
           'file-loader'
         ]
+      },
+      {
+        test: /\.less$/, // 注意less-loader依赖less 所以还得下载less包 npm i -D less less不用配置
+        use: [ // 注意：有先后顺序，后面的是最先的 css-loader必须写在style-loader之后
+          'style-loader', // style-loader的作用是将样式模块生成一个style节点插入head中
+          'css-loader', // css-loader的作用是将css文件转换为一个js模块
+          'less-loader', // 将less转换为css
+        ]
       }
     ]
   }
