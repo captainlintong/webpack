@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin') // 打包html打依赖包
 const CleanWebpackPlugin = require('clean-webpack-plugin') // 清空dist目录的依赖包
 const webpack = require('webpack')
+const VueLoaderPlugin = require('vue-loader/lib/plugin') // 打包vue
 
 module.exports = {
   entry: './src/index.js', // 打包的入口
@@ -26,7 +27,8 @@ module.exports = {
       // title: 'Output Management', 这个没有用
       template: './index.html' // 这个是自己手写的
     }),
-    new webpack.HotModuleReplacementPlugin() // 配置热更新只能css热更新，js文件不能热更新（热更新即不刷新页面 样式发生变化）
+    new webpack.HotModuleReplacementPlugin(), // 配置热更新只能css热更新，js文件不能热更新（热更新即不刷新页面 样式发生变化）
+    new VueLoaderPlugin() // 打包vue文件 确保引入这个插件
   ],
   module: {
     rules: [ // 当加载以.css结尾的文件的时候，使用css-loader、style-loader进行转换
@@ -57,6 +59,15 @@ module.exports = {
         ]
       },
       {
+        enforce: "pre", // 配置eslint语法校验， 强制提前执行，先于babel-loader执行，语法校验后在es6转es5
+        test: /\.js$/,
+        exclude: /node_modules/, // 不校验第三方包
+        loader: "eslint-loader", // 使用eslint-loader来处理
+        options: {
+          fix: true // 尝试自动修改违背规则的简单格式
+        }
+      },
+      {
         test: /\.m?js$/, // 当加载以.js 或 .mjs文件的时候，使用babel-loader将代码中的ES6转换为ES5
         exclude: /(node_modules|bower_components)/, // 排出这些文件中的模块不转换，只转换我们自己的ES6代码，因为一般第三方包提供的 都是转换之后的
         use: {
@@ -66,6 +77,10 @@ module.exports = {
             cacheDirectory: true // babel转换比较耗时，这里是开启结果缓存，它会将每次缓存的结果缓存到node_modules/.cache目录中 ，下次打包如果文件没有变，会直接把缓存拿出来，提高转换效率
           }
         }
+      },
+      {
+        test: /\.vue$/, // 以vue结尾的文件，用vue-loader解析
+        loader: 'vue-loader'
       }
     ]
   }

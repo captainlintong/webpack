@@ -1,31 +1,8 @@
-/**
- * babel-polyfill一定要引入到模块系统入口的顶部
- *
- */
-import "@babel/polyfill"
-
-import foo from './foo'
-/**
- * webpack本身只能打包js模块
- * 如需打包其他资源
- * css
- * less
- * sass
- * 图片
- * json
- * .....
- * 则需要第三方Loader进行处理
- */
-import 'bootstrap/dist/css/bootstrap.css'
-import './styles/index.css'
-
-import './styles/main.less'
-
-foo()
-const msg = '你好啊'
-/**
- * babel默认智能转换核心语法 例如 const  let 箭头函数、类.....
- * 无法转换新增的函数，例如数组的includes， 字符串的startsWith， endsWith
- *
- */
-console.log([1, 2, 3].includes(3))
+import Vue from 'vue'
+import App from './App.vue'
+// 下面这行代码临时关闭不能以new开头的校验规则 在eslint官网 用户指南的规则里找
+/* eslint no-new: "off" */
+new Vue({
+  el: '#app',
+  render: h => h(App) // 渲染App组件，替换到入口节点
+})
